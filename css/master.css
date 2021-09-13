@@ -60,3 +60,36 @@ a:active {
 .main-content {
   text-align: center;
 }
+
+#logo {
+  position: relative;
+  z-index: 3;
+}
+
+#red {
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+  color: #FF005C;
+  opacity: .7;
+  transition: transform .15s ease-out;
+}
+
+#blue {
+  position: absolute;
+  top: 0px;
+  z-index: 2;
+  color: #00B2FF;
+  opacity: .7;
+  transition: transform .15s ease-out;
+}
+
+#logo:hover + #red {
+  position: absolute;
+  transform: translate(-2.2px,-1.7px);
+}
+
+#logo:hover ~ #blue {
+  position: absolute;
+  transform: translate(2.2px,1.7px);
+}
