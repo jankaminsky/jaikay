@@ -8,6 +8,12 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
 h1 {
   font-family: 'Candal', sans-serif;
   letter-spacing: 5px;
@@ -40,6 +46,11 @@ a:active {
   text-decoration: none;
 }
 
+.sublogo {
+  font-family: "Work Sans"; sans-serif;
+  letter-spacing: 3px;
+}
+
 .landing {
   min-height: 100vh;
 }
@@ -60,6 +71,16 @@ a:active {
 
 .main-content {
   text-align: center;
+}
+
+.subcontent {
+  font-size: .8em;
+}
+
+.abstract_background {
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
 }
 
 #logo {
@@ -93,4 +114,19 @@ a:active {
 #logo:hover ~ #blue {
   position: absolute;
   transform: translate(2.2px,1.7px);
+}
+
+#jaikay_abstract{
+  height: 100vh;
+  width:100vw;
+  animation: rotation 50s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
