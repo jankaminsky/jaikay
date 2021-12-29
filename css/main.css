@@ -1,0 +1,265 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(66, 255, 0, 0.14); /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: rgba(66, 255, 0, 0.14); /* Gecko Browsers */
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+h1 {
+  font-family: 'Candal', sans-serif;
+  letter-spacing: 5px;
+  font-size: 3em;
+}
+
+p {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 1px;
+  font-size: 1.1em;
+}
+
+a {
+  color: black;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+footer {
+  font-family: "Playfair Display", serif;
+  font-size: .7em;
+  position: absolute;
+  top: 93%;
+  left: 50%;
+  transform: translate(-50%,50%);
+  text-align: center;
+}
+
+.sublogo {
+  font-family: "Work Sans"; sans-serif;
+  letter-spacing: 3px;
+  cursor: default;
+}
+
+.landing {
+  min-height: 100vh;
+}
+
+.middle-landing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bottom-landing {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%,-15%);
+}
+
+.center-content {
+  text-align: center;
+}
+
+.subcontent {
+  font-size: .8em;
+}
+
+.abstract_background {
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Nav Menu BEGIN */
+
+.inner_main_menu {
+  margin: 0 auto;
+  padding-right: 70px;
+  padding-left: 70px;
+}
+
+.inner_main_menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: right;
+}
+
+.inner_main_menu ul li {
+  float: none;
+  display: inline-block;
+}
+
+.inner_main_menu ul li:nth-child(1) {
+  float: left;
+}
+
+.inner_main_menu ul li:nth-child(2) {
+  float: left;
+}
+
+.inner_main_menu ul li a {
+  font-family: "Work Sans"; sans-serif;
+  font-weight: 300;
+  display: block;
+  padding: 33px 20px;
+}
+
+.inner_main_menu ul li a:hover {
+  text-decoration: underline;
+}
+
+#main_menu {
+  width: 100%;
+  position: relative;
+}
+
+.logo_area {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  content: "";
+  margin-left: -150px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.checkbtn {
+  font-size: 30px;
+  float: left;
+  line-height: 120px;
+  margin-left: 60px;
+  cursor: pointer;
+  display: none;
+}
+
+#check {
+  display: none;
+}
+
+@media (max-width: 858px) {
+  .checkbtn {
+    display: block;
+  }
+
+  .inner_main_menu ul {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 100px;
+    left: -100%;
+    background: #fff;
+    transition: all .5s;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+  }
+
+  .inner_main_menu ul li {
+    float:none;
+    display: block;
+  }
+
+  .inner_main_menu ul li:nth-child(1) {
+    float: none;
+  }
+
+  .inner_main_menu ul li:nth-child(2) {
+    float: none;
+  }
+
+  #check:checked ~ .inner_main_menu ul {
+    left: 0;
+  }
+}
+
+/* Nav Menu END */
+
+#logo {
+  position: relative;
+  z-index: 3;
+  cursor: default;
+}
+
+#red {
+  position: absolute;
+  top: 0px;
+  z-index: 1;
+  color: #FF005C;
+  opacity: .7;
+  transition: transform .15s ease-out;
+}
+
+#blue {
+  position: absolute;
+  top: 0px;
+  z-index: 2;
+  color: #00B2FF;
+  opacity: .7;
+  transition: transform .15s ease-out;
+}
+
+#logo:hover + #red {
+  position: absolute;
+  transform: translate(-2.2px,-1.7px);
+}
+
+#logo:hover ~ #blue {
+  position: absolute;
+  transform: translate(2.2px,1.7px);
+}
+
+#jaikay_abstract{
+  height: 100vh;
+  width:100vw;
+  animation: rotation 50s infinite linear;
+}
+
+#insta_logo {
+  height: 30px;
+  width: 30px;
+  margin-bottom: 15px;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
