@@ -141,6 +141,11 @@ button:hover {
   text-align: justify;
 }
 
+.mantra {
+  padding-left: 20vw;
+  padding-right: 20vw;
+}
+
 .heading {
   padding-bottom: 40px;
   text-align: center;
@@ -154,8 +159,8 @@ button:hover {
 
 .inner_main_menu {
   margin: 0 auto;
-  padding-right: 70px;
-  padding-left: 70px;
+  padding-right: 140px;
+  padding-left: 140px;
 }
 
 .inner_main_menu ul {
@@ -261,6 +266,11 @@ button:hover {
   .main_content {
     padding: 15vh 7vw 50px 7vw;
     text-align: justify;
+  }
+
+  .mantra {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
 }
