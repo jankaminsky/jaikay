@@ -23,7 +23,7 @@ h1 {
 
 h2 {
   font-family: "Playfair Display", serif;
-  font-size: 2.5em;
+  font-size: 1.4em;
 }
 
 h3 {
@@ -34,7 +34,7 @@ h3 {
 p {
   font-family: 'Playfair Display', serif;
   letter-spacing: 1px;
-  font-size: 1.1em;
+  font-size: 1em;
 }
 
 a {
@@ -95,7 +95,7 @@ button:hover {
 }
 .button {
   padding-top: 50px;
-  text-align: right;
+  text-align: center;
 }
 
 .sublogo {
@@ -143,11 +143,11 @@ button:hover {
 
 .heading {
   padding-bottom: 40px;
+  text-align: center;
 }
 
 .subheading {
   padding-top: 10px;
-  text-align: center;
 }
 
 /* Nav Menu BEGIN */
@@ -259,7 +259,7 @@ button:hover {
     left: 0;
   }
   .main_content {
-    padding: 10vh 7vw 50px 7vw;
+    padding: 15vh 7vw 50px 7vw;
     text-align: justify;
   }
 
@@ -340,6 +340,19 @@ button:hover {
 
 .product-title {
   font-family: "Work Sans", sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.item {
+  max-width: 85vw;
+}
+.product-image {
+  max-width: 100%;
+}
+
+.product-subtext {
+  font-family: "Work Sans", sans-serif;
   font-weight: normal;
-  font-size: 1.2em;
+  font-size: .8em;
 }
