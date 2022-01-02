@@ -147,12 +147,12 @@ button:hover {
 }
 
 .heading {
-  padding-bottom: 40px;
+  padding-bottom: 10px;
   text-align: center;
 }
 
 .subheading {
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 /* Nav Menu BEGIN */
