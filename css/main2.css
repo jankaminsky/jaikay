@@ -1,0 +1,180 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+  height: 100vh;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav a {
+  color: #000;
+  text-decoration: none;
+  display: inline-block;
+}
+
+h1 {
+  font-family: 'Candal', sans-serif;
+  letter-spacing: 10px;
+  font-size: 10rem;
+}
+
+.middle-out{
+  position: relative;
+}
+
+.middle-out:before{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.middle-out:hover:before {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+.right-to-left{
+  position: relative;
+}
+
+.right-to-left:before{
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  right: 0;
+  background-color: #000;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.right-to-left:hover:before {
+  visibility: visible;
+  width: 100%;
+}
+
+.container{
+  width:80%;
+  margin: 0 auto;
+}
+
+.fixed-header, .fixed-footer {
+  width: 100%;
+  position: fixed;
+  padding: 10px 0;
+  color: #fff
+}
+
+.fixed-header{
+  top: 10%;
+}
+
+.fixed-footer{
+  bottom: 10%;
+}
+
+.middle-landing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center-content {
+  text-align: center;
+}
+
+.sublogo-text {
+  font-size: 2.5em;
+  letter-spacing: 5px;
+}
+
+#textbox {
+  display: flex;
+  justify-content: space-between;
+}
+
+#logo {
+  -webkit-animation: realignment 1s ease-out;
+}
+
+#logo:hover {
+  -webkit-filter: invert(100%);
+  -webkit-animation: rotation 10s infinite linear;
+  cursor: none;
+}
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@-webkit-keyframes realignment {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  0%   {
+      -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(0deg);  /* IE 9 */
+      transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+  }
+  100% {
+      -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(360deg);  /* IE 9 */
+      transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+  }
+}
+@keyframes spin {
+  0%   {
+      -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(0deg);  /* IE 9 */
+      transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+  }
+  100% {
+      -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+      -ms-transform: rotate(360deg);  /* IE 9 */
+      transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+  }
+}
+
+/* responsive, form small screens, use 13px font size */
+@media (max-width: 800px) {
+  h1 {
+      font-size: 5rem;
+      letter-spacing: 3px;
+  }
+
+  .sublogo-text {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+
+}

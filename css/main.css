@@ -5,30 +5,35 @@
 }
 
 ::selection {
-  background: rgba(66, 255, 0, 0.14); /* WebKit/Blink Browsers */
+  background: rgba(66, 255, 0, 0.14);
+  /* WebKit/Blink Browsers */
 }
+
 ::-moz-selection {
-  background: rgba(66, 255, 0, 0.14); /* Gecko Browsers */
+  background: rgba(66, 255, 0, 0.14);
+  /* Gecko Browsers */
 }
 
 html {
   -webkit-text-size-adjust: 100%;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
   overflow: hidden;
 }
 
 h1 {
-  font-family: 'Candal', sans-serif;
-  letter-spacing: 5px;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0px;
   font-size: 3em;
+  font-weight: 800;
 }
 
 p {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Schibsted Grotesk', serif;
   letter-spacing: 1px;
   font-size: 1.1em;
 }
@@ -54,17 +59,18 @@ a:active {
 }
 
 footer {
-  font-family: "Playfair Display", serif;
+  font-family: "Schibsted Grotesk", serif;
   font-size: .7em;
   position: absolute;
   top: 93%;
   left: 50%;
-  transform: translate(-50%,50%);
+  transform: translate(-50%, 50%);
   text-align: center;
 }
 
 .sublogo {
-  font-family: "Work Sans"; sans-serif;
+  font-family: "Schibsted Grotesk";
+  sans-serif;
   letter-spacing: 3px;
   cursor: default;
 }
@@ -84,7 +90,7 @@ footer {
   position: absolute;
   top: 70%;
   left: 50%;
-  transform: translate(-50%,-15%);
+  transform: translate(-50%, -15%);
 }
 
 .center-content {
@@ -130,7 +136,7 @@ footer {
 }
 
 .inner_main_menu ul li a {
-  font-family: "Work Sans"; sans-serif;
+  font-family: "Work Sans", sans-serif;
   font-weight: 300;
   display: block;
   padding: 33px 20px;
@@ -190,7 +196,7 @@ footer {
   }
 
   .inner_main_menu ul li {
-    float:none;
+    float: none;
     display: block;
   }
 
@@ -202,7 +208,7 @@ footer {
     float: none;
   }
 
-  #check:checked ~ .inner_main_menu ul {
+  #check:checked~.inner_main_menu ul {
     left: 0;
   }
 }
@@ -233,19 +239,19 @@ footer {
   transition: transform .15s ease-out;
 }
 
-#logo:hover + #red {
+#logo:hover+#red {
   position: absolute;
-  transform: translate(-2.2px,-1.7px);
+  transform: translate(-2.2px, -1.7px);
 }
 
-#logo:hover ~ #blue {
+#logo:hover~#blue {
   position: absolute;
-  transform: translate(2.2px,1.7px);
+  transform: translate(2.2px, 1.7px);
 }
 
-#jaikay_abstract{
+#jaikay_abstract {
   height: 100vh;
-  width:100vw;
+  width: 100vw;
   animation: rotation 50s infinite linear;
 }
 
@@ -259,6 +265,7 @@ footer {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(359deg);
   }
