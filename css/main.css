@@ -69,8 +69,7 @@ footer {
 }
 
 .sublogo {
-  font-family: "Schibsted Grotesk";
-  sans-serif;
+  font-family: "Schibsted Grotesk", sans-serif;
   letter-spacing: 3px;
   cursor: default;
 }
