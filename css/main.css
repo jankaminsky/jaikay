@@ -135,6 +135,10 @@ section {
 }
 
 @media (max-width: 768px) {
+  .feature-hero {
+    padding: 80px 20px;
+  }
+  
   .services {
     grid-template-columns: 1fr 1fr;
   }
