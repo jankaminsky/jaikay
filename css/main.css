@@ -140,7 +140,7 @@ section {
   }
   
   .services {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr;
   }
 
   .service-block:first-child {
