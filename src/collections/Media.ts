@@ -3,7 +3,7 @@ import type { CollectionConfig } from 'payload'
 export const Media: CollectionConfig = {
   slug: 'media',
   upload: {
-    staticDir: 'public/media',
+    staticDir: process.env.NODE_ENV === 'production' ? '/tmp' : 'public/media',
     imageSizes: [
       {
         name: 'thumbnail',
