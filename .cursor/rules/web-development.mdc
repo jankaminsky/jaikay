@@ -1,0 +1,17 @@
+---
+description: Frontend styling guidelines, React component architecture, Next.js App Router rules, Tailwind CSS utility guidelines, and responsive layouts.
+globs: src/app/**/*, src/components/**/*, src/styles/**/*
+alwaysApply: false
+---
+# Web Development & Styling Guidelines
+
+## Next.js & React Component Architecture
+*   **React Server Components (RSC)**: Use Server Components by default for pages, layout headers, and content fetching. Only add `"use client"` when state, hooks, or event listeners are required.
+*   **Modular Blocks**: When rebuilding the JAIKAY site, separate sections (Hero, Services, Ethos, Contact) into reusable block components that can map directly to Payload CMS blocks.
+*   **SEO Optimization**: Every page must have metadata tags, including structured meta descriptions, titles, viewport tags, and open graph standards.
+
+## Styling (Tailwind CSS)
+*   **Theme Tokens**: Leverage Tailwind theme variables for custom brand spacing, fonts (e.g. `Inter Tight` and `Space Mono` from Google Fonts), and consistent color palettes.
+*   **Premium Aesthetic**: Avoid basic generic colors. Utilize smooth gradients, clean dark modes, soft border borders, and glassmorphism where appropriate.
+*   **Animations**: Implement subtle micro-animations (e.g., transition effects on hover, fade-ins on scroll) to make the page feel responsive and alive.
+*   **No Placeholders**: Never use placeholder images. If visual assets are needed, generate them using the `generate_image` tool or request actual assets.

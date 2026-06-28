@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans), sans-serif;
+  --font-mono: var(--font-mono), monospace;
+}
+
+body {
+  background: white;
+  color: black;
+  font-family: var(--font-sans);
+}
+
+html, body {
+  font-feature-settings: unset !important;
+  font-variation-settings: unset !important;
+  letter-spacing: normal !important;
+  line-height: 1.2 !important;
+}

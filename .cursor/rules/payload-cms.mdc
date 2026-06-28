@@ -1,0 +1,17 @@
+---
+description: Config guidelines for Payload CMS 3.x, collection schemas, database fields, rich text lexical configuration, and seed scripts.
+globs: payload.config.ts, src/collections/**/*, src/globals/**/*
+alwaysApply: false
+---
+# Payload CMS 3.x Coding Guidelines
+
+## Configuration & Schema Design
+*   **Next.js Native Configuration**: Always structure Payload config files for Next.js App Router compatibility.
+*   **Database Adapter**: Use the MongoDB Database Adapter (`@payloadcms/db-mongodb`). Ensure MongoDB connections are managed via environment variables (`DATABASE_URI`).
+*   **Strong Typing**: Run `payload generate:types` after modifying schemas to maintain strict Type safety. Use the generated types in custom blocks and frontends.
+
+## Collections & Blocks
+*   **Component Blocks Mapping**: When designing schemas, map collections and globals directly to frontend block structures.
+    *   Example: A `Pages` collection with a `blocks` field that contains custom layouts (e.g. `HeroBlock`, `ServicesBlock`, `EthosBlock`).
+*   **Access Control**: Explicitly define read, create, update, and delete access rules for collections and globals. Avoid wide-open access in production configurations.
+*   **Lexical Rich Text**: Use `@payloadcms/richtext-lexical` for rich text input. Always configure the editors with clear formatting options.

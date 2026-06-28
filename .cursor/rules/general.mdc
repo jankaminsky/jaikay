@@ -1,0 +1,19 @@
+---
+description: General codebase habits, git styling, type safety, and workspace conventions.
+globs: *
+alwaysApply: true
+---
+# General Codebase Guidelines
+
+## Code Quality & Type Safety
+*   **TypeScript Strict Mode**: Always write type-safe code. Avoid using `any` types; prefer strict interfaces and type definitions.
+*   **Zero Lint Warnings**: Ensure all code is linted and formatted properly before concluding.
+*   **Imports**: Use absolute path imports matching the TSConfig path mapping (`@/*`).
+
+## Documentation & Comments
+*   **Docstrings**: Maintain documentation integrity. Keep existing comments and docstrings in code unless specifically requested to modify them.
+*   **Inline Comments**: Write explanatory comments for complex business logic, but prefer self-documenting code.
+
+## Git Workflow
+*   **Commits**: Use structured, clear, and descriptive commit messages (e.g. following Conventional Commits format like `feat(cms): add pages collection`).
+*   **Stability**: Ensure the codebase builds successfully after every modification. Do not commit broken states.
