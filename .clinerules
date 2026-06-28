@@ -1,8 +1,0 @@
-# Cline/Claude Dev Workspace Rules
-
-This repository uses structured Project Rules (`.cursor/rules/`) and Agent Skills (`.agents/skills/`).
-
-Before executing any edits:
-1. Refer to `.cursor/rules/` for global style guides matching the files you edit.
-2. Read the `AI_INSTRUCTIONS.md` at the root for a full overview of the project setup and available skills.
-3. If implementing CMS collections, React components, or MongoDB queries, load and follow the instructions in the corresponding `.agents/skills/` folders.

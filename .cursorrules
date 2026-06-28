@@ -1,8 +1,0 @@
-# Cursor Workspace Rules
-
-This repository uses structured Project Rules (`.cursor/rules/`) and Agent Skills (`.agents/skills/`).
-
-Before executing any edits:
-1. Always check for matching rules in `.cursor/rules/` for the files you are editing.
-2. Read the `AI_INSTRUCTIONS.md` at the root for a full overview of the project setup and available skills.
-3. If implementing CMS collections, React components, or web UIs, load and follow the guidelines in `.agents/skills/` (e.g., `payload`, `nextjs-expert`, `web-ui-best-practices`).

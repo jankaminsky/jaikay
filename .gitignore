@@ -42,3 +42,16 @@ next-env.d.ts
 
 # macOS metadata files
 ._*
+
+# AI Agent skills, rules, and configurations
+.agents/
+.cursor/
+.cursorrules
+.clinerules
+AGENTS.md
+AI_INSTRUCTIONS.md
+CLAUDE.md
+skills-lock.json
+
+# Legacy static website files
+legacy-static/
