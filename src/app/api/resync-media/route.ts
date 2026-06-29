@@ -18,11 +18,11 @@ import configPromise from '@payload-config'
  * ⚠️ DELETE THIS ROUTE after running it once in production.
  */
 export async function GET(request: Request) {
-  // Basic security: require a secret query param
+  // Basic security: require a temporary token (DELETE THIS ROUTE AFTER USE)
   const url = new URL(request.url)
-  const secret = url.searchParams.get('secret')
+  const token = url.searchParams.get('token')
 
-  if (secret !== (process.env.PAYLOAD_SECRET || '')) {
+  if (token !== 'resync-media-2026') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
