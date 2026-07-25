@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter_Tight, Space_Mono } from 'next/font/google'
+import Script from 'next/script'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { Header } from '@/components/globals/Header'
@@ -48,9 +49,6 @@ export async function generateMetadata({
     },
   }
 }
-
-import Script from 'next/script'
-
 export default async function RootLayout({
   children,
   params,
@@ -71,6 +69,19 @@ export default async function RootLayout({
         {children}
         <Footer footer={footer} />
         <Script id="hs-script-loader" strategy="afterInteractive" src="//js-na3.hs-scripts.com/342977528.js" />
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-LZD4XQB042"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-LZD4XQB042');
+          `}
+        </Script>
       </body>
     </html>
   )
