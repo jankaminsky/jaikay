@@ -4,13 +4,11 @@ import { Buffer } from 'buffer'
 // Helper to sanitize SharedArrayBuffer-backed Buffers (which cause undici fetch in Vercel Blob to fail)
 const cleanBuffer = (buf: any): any => {
   if (!buf || !Buffer.isBuffer(buf)) return buf
-  if (buf.buffer && typeof SharedArrayBuffer !== 'undefined' && buf.buffer instanceof SharedArrayBuffer) {
-    const cleanArrayBuffer = new ArrayBuffer(buf.byteLength)
-    const view = new Uint8Array(cleanArrayBuffer)
-    view.set(new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength))
-    return Buffer.from(cleanArrayBuffer)
-  }
-  return buf
+  // Unconditionally copy to a clean, standalone ArrayBuffer to guarantee no SharedArrayBuffer is passed to undici
+  const cleanArrayBuffer = new ArrayBuffer(buf.byteLength)
+  const view = new Uint8Array(cleanArrayBuffer)
+  view.set(new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength))
+  return Buffer.from(cleanArrayBuffer)
 }
 
 const sanitizeReqBuffers = ({ req }: { req: any }) => {
@@ -20,25 +18,50 @@ const sanitizeReqBuffers = ({ req }: { req: any }) => {
   }
   if (req.file && req.file.sizes) {
     Object.keys(req.file.sizes).forEach((sizeKey) => {
-      if (req.file.sizes[sizeKey] && req.file.sizes[sizeKey].data) {
-        req.file.sizes[sizeKey].data = cleanBuffer(req.file.sizes[sizeKey].data)
+      const val = req.file.sizes[sizeKey]
+      if (!val) return
+      if (Buffer.isBuffer(val)) {
+        req.file.sizes[sizeKey] = cleanBuffer(val)
+      } else if (val.data) {
+        val.data = cleanBuffer(val.data)
       }
     })
   }
   if (req.payloadUploadSizes) {
     Object.keys(req.payloadUploadSizes).forEach((sizeKey) => {
-      if (req.payloadUploadSizes[sizeKey] && req.payloadUploadSizes[sizeKey].data) {
-        req.payloadUploadSizes[sizeKey].data = cleanBuffer(req.payloadUploadSizes[sizeKey].data)
+      const val = req.payloadUploadSizes[sizeKey]
+      if (!val) return
+      if (Buffer.isBuffer(val)) {
+        req.payloadUploadSizes[sizeKey] = cleanBuffer(val)
+      } else if (val.data) {
+        val.data = cleanBuffer(val.data)
       }
     })
   }
-  if (req.context && req.context._payloadCloudStorage && req.context._payloadCloudStorage.file) {
-    const f = req.context._payloadCloudStorage.file
-    if (f.data) f.data = cleanBuffer(f.data)
-    if (f.sizes) {
-      Object.keys(f.sizes).forEach((sizeKey) => {
-        if (f.sizes[sizeKey] && f.sizes[sizeKey].data) {
-          f.sizes[sizeKey].data = cleanBuffer(f.sizes[sizeKey].data)
+  if (req.context && req.context._payloadCloudStorage) {
+    const ctxStorage = req.context._payloadCloudStorage
+    if (ctxStorage.file && ctxStorage.file.data) {
+      ctxStorage.file.data = cleanBuffer(ctxStorage.file.data)
+    }
+    if (ctxStorage.file && ctxStorage.file.sizes) {
+      Object.keys(ctxStorage.file.sizes).forEach((sizeKey) => {
+        const val = ctxStorage.file.sizes[sizeKey]
+        if (!val) return
+        if (Buffer.isBuffer(val)) {
+          ctxStorage.file.sizes[sizeKey] = cleanBuffer(val)
+        } else if (val.data) {
+          val.data = cleanBuffer(val.data)
+        }
+      })
+    }
+    if (ctxStorage.uploadSizes) {
+      Object.keys(ctxStorage.uploadSizes).forEach((sizeKey) => {
+        const val = ctxStorage.uploadSizes[sizeKey]
+        if (!val) return
+        if (Buffer.isBuffer(val)) {
+          ctxStorage.uploadSizes[sizeKey] = cleanBuffer(val)
+        } else if (val.data) {
+          val.data = cleanBuffer(val.data)
         }
       })
     }
