@@ -23,7 +23,9 @@ export const Media: CollectionConfig = {
         position: 'centre',
       },
     ],
-    mimeTypes: ['image/*'],
+    // Include 'text/plain' because during Vercel Blob clientUploads, server-side buffer detection
+    // receives an empty buffer and falls back to getFileTypeFallback, which defaults to 'text/plain'.
+    mimeTypes: ['image/*', 'text/plain'],
   },
   access: {
     read: () => true,
