@@ -13,6 +13,14 @@ import { SiteSettings } from './src/globals/SiteSettings'
 import sharp from 'sharp'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
+// Ensure sharp runs single-threaded in serverless environments to prevent SharedArrayBuffer usage
+process.env.SHARP_CONCURRENCY = '1'
+try {
+  sharp.concurrency(1)
+} catch (e) {
+  // ignore if concurrency setting fails
+}
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -45,7 +53,6 @@ export default buildConfig({
         media: true,
       },
       token: process.env.BLOB_READ_WRITE_TOKEN,
-      clientUploads: true,
     }),
   ],
   db: mongooseAdapter({
