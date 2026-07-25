@@ -57,6 +57,8 @@ export async function generateStaticParams() {
   return params
 }
 
+export const revalidate = 60
+
 export default async function Page({ params }: { params: Promise<{ locale: string, slug: string }> }) {
   const { slug, locale } = await params
   
