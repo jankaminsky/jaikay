@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useActionState } from 'react'
+import React, { useActionState, useState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom'
 import { usePathname } from 'next/navigation'
 import { submitContactForm } from '@/actions/contact'
@@ -31,8 +31,13 @@ export const ContactFormBlock: React.FC<any> = ({
   submitButtonLoadingLabel,
 }) => {
   const [state, formAction] = useActionState(submitContactForm, { status: 'idle' })
+  const [loadedAt, setLoadedAt] = useState<number>(0)
   const pathname = usePathname()
   const isFr = pathname.startsWith('/fr/') || pathname === '/fr'
+
+  useEffect(() => {
+    setLoadedAt(Date.now())
+  }, [])
 
   const fNameLabel = firstNameLabel || (isFr ? 'Prénom' : 'First Name')
   const lNameLabel = lastNameLabel || (isFr ? 'Nom' : 'Last Name')
@@ -66,6 +71,15 @@ export const ContactFormBlock: React.FC<any> = ({
 
           <form action={formAction} className="space-y-6">
             <input type="hidden" name="locale" value={isFr ? 'fr' : 'en'} />
+            <input type="hidden" name="form_loaded_at" value={loadedAt} />
+
+            {/* Honeypot fields - invisible to humans, auto-filled by scrapers */}
+            <div className="absolute opacity-0 -z-10 w-0 h-0 overflow-hidden pointer-events-none" aria-hidden="true">
+              <label htmlFor="company_website">Website</label>
+              <input type="text" id="company_website" name="company_website" tabIndex={-1} autoComplete="off" />
+              <label htmlFor="work_phone">Work Phone</label>
+              <input type="text" id="work_phone" name="work_phone" tabIndex={-1} autoComplete="off" />
+            </div>
             
             {state.status === 'error' && state.message && (
               <div className="p-4 border border-red-500 bg-red-50 text-red-800 font-medium mb-6">

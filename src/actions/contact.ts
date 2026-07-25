@@ -21,11 +21,81 @@ export type ContactFormState = {
   message?: string
 }
 
+function containsSpamPatterns(firstname: string, lastname: string, message: string): boolean {
+  const combinedText = `${firstname} ${lastname} ${message}`.toLowerCase()
+
+  // Check for URLs or HTML tags in names (real names never contain http://, www., or HTML tags)
+  const nameText = `${firstname} ${lastname}`.toLowerCase()
+  if (/https?:\/\/|www\.|<a\s|\[url=/i.test(nameText)) {
+    return true
+  }
+
+  // Check for excessive URLs in the message (2 or more links is almost always spam)
+  const urlMatches = message.match(/https?:\/\/|www\.|\.com|\.ru|\.net|\.org|\[url=/gi)
+  if (urlMatches && urlMatches.length >= 2) {
+    return true
+  }
+
+  // Check for common automated bot / SEO marketing spam keywords
+  const spamKeywords = [
+    'seo services',
+    'rank on google',
+    'first page of google',
+    'boost your traffic',
+    'generate leads',
+    'web design services',
+    'domain registration',
+    'telegram:',
+    'whatsapp:',
+    'guest post',
+    'backlinks',
+    'casino',
+    'crypto investing',
+    'eric jones',
+  ]
+
+  for (const keyword of spamKeywords) {
+    if (combinedText.includes(keyword)) {
+      return true
+    }
+  }
+
+  // Check for BBCode / HTML link injections in message
+  if (/<a\s+href=|\[url=|\{url\}/i.test(message)) {
+    return true
+  }
+
+  return false
+}
+
 export async function submitContactForm(
   prevState: ContactFormState,
   formData: FormData
 ): Promise<ContactFormState> {
   const isFr = formData.get('locale') === 'fr'
+  const fakeSuccessMessage = isFr
+    ? 'Merci pour votre message. Nous vous contacterons bientôt.'
+    : 'Thank you for your message. We will be in touch soon.'
+
+  // 1. Honeypot Check (Invisible fields for bots)
+  // Bots auto-fill all DOM inputs. If either honeypot field has text, silently discard as spam.
+  const honeypotWebsite = formData.get('company_website')
+  const honeypotPhone = formData.get('work_phone')
+  if (honeypotWebsite || honeypotPhone) {
+    console.warn('[Spam Protection] Blocked submission: Honeypot field triggered.')
+    return { status: 'success', message: fakeSuccessMessage }
+  }
+
+  // 2. Time-trap Check (Minimum submission time)
+  // Real humans take at least 3 seconds to fill out a form. Scrapers submit immediately or via direct POST.
+  const loadedAtStr = formData.get('form_loaded_at')
+  const loadedAt = loadedAtStr ? Number(loadedAtStr) : 0
+  const now = Date.now()
+  if (!loadedAt || isNaN(loadedAt) || now - loadedAt < 3000 || loadedAt > now + 60000) {
+    console.warn('[Spam Protection] Blocked submission: Time-trap check failed (too fast or missing timestamp).')
+    return { status: 'success', message: fakeSuccessMessage }
+  }
+
   const contactFormSchema = getContactFormSchema(isFr)
 
   const data = {
@@ -43,6 +113,19 @@ export async function submitContactForm(
       errors: validatedFields.error.flatten().fieldErrors,
       message: isFr ? 'Veuillez corriger les erreurs ci-dessous.' : 'Please fix the errors below.',
     }
+  }
+
+  // 3. Content Pattern Inspection
+  // Check for SEO spam keywords, HTML injections, and URLs in names or messages.
+  if (
+    containsSpamPatterns(
+      String(data.firstname || ''),
+      String(data.lastname || ''),
+      String(data.message || '')
+    )
+  ) {
+    console.warn('[Spam Protection] Blocked submission: Spam content patterns detected.')
+    return { status: 'success', message: fakeSuccessMessage }
   }
 
   // Submit the data to HubSpot Forms API securely from the server
