@@ -20,7 +20,7 @@ export const RenderBlocks: React.FC<{ blocks: Page['layout'] }> = ({ blocks }) =
   return (
     <main>
       {blocks.map((block, index) => {
-        const BlockComponent = blockComponents[block.blockType]
+        const BlockComponent = blockComponents[block.blockType] as React.FC<typeof block>
 
         if (!BlockComponent) return null
 
