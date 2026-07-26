@@ -35,7 +35,7 @@ export default buildConfig({
   globals: [Header, Footer, SiteSettings],
   sharp,
   editor: lexicalEditor({}),
-  secret: process.env.PAYLOAD_SECRET || 'a-very-secret-key-change-in-production-1234567890',
+  secret: process.env.PAYLOAD_SECRET!,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
@@ -56,7 +56,7 @@ export default buildConfig({
     }),
   ],
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI || 'mongodb://127.0.0.1/jaikay',
+    url: process.env.DATABASE_URI!,
   }),
   localization: {
     locales: ['en', 'fr'],

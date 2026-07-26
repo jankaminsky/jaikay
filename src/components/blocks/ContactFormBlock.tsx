@@ -5,6 +5,9 @@ import { useFormStatus } from 'react-dom'
 import { usePathname } from 'next/navigation'
 import { submitContactForm } from '@/actions/contact'
 import { FadeIn } from '@/components/FadeIn'
+import type { Page } from '../../../payload-types'
+
+type ContactFormBlockProps = Extract<NonNullable<Page['layout']>[number], { blockType: 'contactForm' }>
 
 function SubmitButton({ label, loadingLabel }: { label: string; loadingLabel: string }) {
   const { pending } = useFormStatus()
@@ -20,7 +23,7 @@ function SubmitButton({ label, loadingLabel }: { label: string; loadingLabel: st
   )
 }
 
-export const ContactFormBlock: React.FC<any> = ({
+export const ContactFormBlock: React.FC<ContactFormBlockProps> = ({
   heading,
   successMessage,
   firstNameLabel,

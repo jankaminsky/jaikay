@@ -130,8 +130,17 @@ export async function submitContactForm(
 
   // Submit the data to HubSpot Forms API securely from the server
   try {
-    const portalId = '342977528'
-    const formGuid = 'a20e2959-54ba-4b19-8754-b7011e4187f4'
+    const portalId = process.env.HUBSPOT_PORTAL_ID
+    const formGuid = process.env.HUBSPOT_FORM_GUID
+
+    if (!portalId || !formGuid) {
+      console.error('HubSpot configuration missing: HUBSPOT_PORTAL_ID or HUBSPOT_FORM_GUID not set')
+      return {
+        status: 'error' as const,
+        message: isFr ? "Une erreur est survenue lors de l'envoi du formulaire. Veuillez réessayer." : 'There was a problem submitting your form. Please try again.',
+      }
+    }
+
     const hubspotEndpoint = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`
 
     const response = await fetch(hubspotEndpoint, {
